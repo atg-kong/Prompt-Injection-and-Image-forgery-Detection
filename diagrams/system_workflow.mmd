@@ -1,0 +1,46 @@
+%% System Workflow Diagram
+%% Prompt Injection and Image Forgery Detection System
+
+flowchart TD
+    A[User Input] --> B{Input Type?}
+
+    B -->|Text Only| C[Text Input Module]
+    B -->|Image Only| D[Image Input Module]
+    B -->|Text + Image| E[Both Modules]
+
+    C --> F[BERT-based<br/>Prompt Injection Detector]
+    F --> G[Text Classification Result]
+
+    D --> H[Image Preprocessing]
+    H --> I[OCR Module<br/>Extract Text from Image]
+    H --> J[EfficientNet<br/>Forgery Detector]
+    I --> K[Extracted Text Analysis]
+    J --> L[Image Forgery Result]
+
+    E --> C
+    E --> D
+
+    G --> M[Fusion Layer]
+    K --> M
+    L --> M
+
+    D --> N[CLIP Module]
+    N --> O[Text-Image<br/>Consistency Score]
+    O --> M
+
+    M --> P{Final Decision}
+
+    P -->|All Safe| Q[✓ SAFE CONTENT]
+    P -->|Any Threat Detected| R[✗ MALICIOUS/FORGED]
+
+    Q --> S[Generate Report]
+    R --> S
+    S --> T[Output to User]
+
+    style A fill:#e1f5fe
+    style Q fill:#c8e6c9
+    style R fill:#ffcdd2
+    style M fill:#fff9c4
+    style F fill:#f3e5f5
+    style J fill:#f3e5f5
+    style N fill:#f3e5f5
