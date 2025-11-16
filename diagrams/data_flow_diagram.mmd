@@ -1,0 +1,65 @@
+%% Data Flow Diagram (DFD) - Level 1
+%% Prompt Injection and Image Forgery Detection
+
+flowchart LR
+    subgraph EXTERNAL[External Entities]
+        U((User))
+        DS[(Dataset<br/>Storage)]
+        ML[(Model<br/>Storage)]
+    end
+
+    subgraph PROCESSES[Main Processes]
+        P1[1.0<br/>Input<br/>Validation]
+        P2[2.0<br/>Text<br/>Analysis]
+        P3[3.0<br/>Image<br/>Analysis]
+        P4[4.0<br/>OCR<br/>Processing]
+        P5[5.0<br/>CLIP<br/>Matching]
+        P6[6.0<br/>Result<br/>Fusion]
+        P7[7.0<br/>Report<br/>Generation]
+    end
+
+    subgraph DATA_STORES[Data Stores]
+        D1[D1: Text Features]
+        D2[D2: Image Features]
+        D3[D3: OCR Results]
+        D4[D4: CLIP Scores]
+        D5[D5: Final Results]
+    end
+
+    U -->|"Text + Image<br/>+ Caption"| P1
+    DS -->|"Training Data"| P2
+    DS -->|"Training Data"| P3
+    ML -->|"Pretrained Models"| P2
+    ML -->|"Pretrained Models"| P3
+    ML -->|"CLIP Model"| P5
+
+    P1 -->|"Validated Text"| P2
+    P1 -->|"Validated Image"| P3
+    P1 -->|"Image"| P4
+    P1 -->|"Caption + Image"| P5
+
+    P2 -->|"Injection Score"| D1
+    P3 -->|"Forgery Score"| D2
+    P4 -->|"Extracted Text"| D3
+    P5 -->|"Similarity Score"| D4
+
+    D1 -->|"Text Result"| P6
+    D2 -->|"Image Result"| P6
+    D3 -->|"OCR Result"| P6
+    D4 -->|"CLIP Result"| P6
+
+    P6 -->|"Combined Score"| D5
+    D5 -->|"Final Decision"| P7
+
+    P7 -->|"Detection Report"| U
+
+    style U fill:#bbdefb
+    style DS fill:#c8e6c9
+    style ML fill:#ffe0b2
+    style P1 fill:#f8bbd0
+    style P2 fill:#e1bee7
+    style P3 fill:#d1c4e9
+    style P4 fill:#c5cae9
+    style P5 fill:#b3e5fc
+    style P6 fill:#b2dfdb
+    style P7 fill:#dcedc8

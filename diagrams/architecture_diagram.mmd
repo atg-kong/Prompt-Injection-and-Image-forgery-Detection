@@ -1,0 +1,77 @@
+%% System Architecture Diagram
+%% Multimodal Detection System Architecture
+
+graph TB
+    subgraph INPUT_LAYER[Input Layer]
+        A1[Text Input]
+        A2[Image Input]
+        A3[Caption/Description]
+    end
+
+    subgraph TEXT_PROCESSING[Text Processing Module]
+        B1[Text Tokenization]
+        B2[BERT Encoder]
+        B3[Classification Head]
+        B1 --> B2 --> B3
+    end
+
+    subgraph IMAGE_PROCESSING[Image Processing Module]
+        C1[Image Resize & Normalize]
+        C2[EfficientNet Backbone]
+        C3[Feature Extraction]
+        C4[Forgery Classifier]
+        C1 --> C2 --> C3 --> C4
+    end
+
+    subgraph OCR_MODULE[OCR Module]
+        D1[Pytesseract Engine]
+        D2[Text Extraction]
+        D3[Hidden Text Analysis]
+        D1 --> D2 --> D3
+    end
+
+    subgraph CLIP_MODULE[CLIP Consistency Module]
+        E1[CLIP Text Encoder]
+        E2[CLIP Image Encoder]
+        E3[Cosine Similarity]
+        E1 --> E3
+        E2 --> E3
+    end
+
+    subgraph FUSION_LAYER[Fusion Layer]
+        F1[Feature Concatenation]
+        F2[Logistic Regression]
+        F3[Rule-Based Logic]
+        F4[Final Score Computation]
+        F1 --> F2
+        F1 --> F3
+        F2 --> F4
+        F3 --> F4
+    end
+
+    subgraph OUTPUT_LAYER[Output Layer]
+        G1[Classification Result]
+        G2[Confidence Score]
+        G3[Detailed Report]
+    end
+
+    A1 --> TEXT_PROCESSING
+    A2 --> IMAGE_PROCESSING
+    A2 --> OCR_MODULE
+    A3 --> CLIP_MODULE
+    A2 --> CLIP_MODULE
+
+    B3 --> FUSION_LAYER
+    C4 --> FUSION_LAYER
+    D3 --> FUSION_LAYER
+    E3 --> FUSION_LAYER
+
+    FUSION_LAYER --> OUTPUT_LAYER
+
+    style INPUT_LAYER fill:#e3f2fd
+    style TEXT_PROCESSING fill:#f3e5f5
+    style IMAGE_PROCESSING fill:#e8f5e9
+    style OCR_MODULE fill:#fff3e0
+    style CLIP_MODULE fill:#fce4ec
+    style FUSION_LAYER fill:#fffde7
+    style OUTPUT_LAYER fill:#f5f5f5

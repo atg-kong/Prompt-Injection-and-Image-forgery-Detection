@@ -1,0 +1,13 @@
+experiment_id,text_weight,image_weight,clip_weight,ocr_weight,method,accuracy,precision,recall,f1_score,notes
+1,1.0,1.0,1.0,0.5,rule_based,0.8720,0.8645,0.8823,0.8733,Default thresholds
+2,1.0,1.0,1.0,0.5,ml_based,0.8890,0.8756,0.9045,0.8898,Logistic regression
+3,1.0,1.0,1.0,0.5,combined,0.8930,0.8812,0.9087,0.8948,Best performance
+4,1.2,1.0,0.8,0.5,combined,0.8845,0.8723,0.8978,0.8849,Higher text weight
+5,0.8,1.2,1.0,0.5,combined,0.8812,0.8689,0.8956,0.8821,Higher image weight
+6,1.0,1.0,1.2,0.5,combined,0.8867,0.8734,0.9012,0.8871,Higher CLIP weight
+7,1.0,1.0,1.0,0.8,combined,0.8901,0.8778,0.9056,0.8915,Higher OCR weight
+8,1.0,1.0,1.0,0.0,combined,0.8823,0.8698,0.8967,0.8831,Without OCR
+9,1.0,1.0,0.0,0.0,combined,0.8645,0.8512,0.8789,0.8648,Without CLIP/OCR
+10,1.0,0.0,0.0,0.0,ml_based,0.9120,0.9045,0.9234,0.9139,Text only
+11,0.0,1.0,0.0,0.0,ml_based,0.8750,0.8623,0.8912,0.8765,Image only
+12,1.0,1.0,1.0,1.0,combined,0.8930,0.8812,0.9087,0.8948,Final best model
